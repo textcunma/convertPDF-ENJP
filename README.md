@@ -29,11 +29,8 @@ PDFファイルを入力, 出力は日本語文。
 
 3. ライブラリをインストール
      ``` bash
-     pip install -U easynmt
-     pip install -U protobuf~=3.20.0
-     pip install pdfminer.six
+     pip install -r requirements.txt
      ```
-     その他、「shutil」等の些細なライブラリをインストールする必要がありますが説明は省きます
 
 4. 実行
      ``` bash
