@@ -42,7 +42,10 @@ def main(args):
 		lines = text.splitlines()
 
 		# モデル読み込み
-		model = EasyNMT('mbart50_m2m')
+		if args.gpu:
+			model = EasyNMT('mbart50_m2m', device='cuda')
+		else:
+			model = EasyNMT('mbart50_m2m')
 
 		# 英語から日本語へ変換
 		jplines = ''
@@ -50,6 +53,7 @@ def main(args):
 			if len(line) <= 1:
 				continue
 			line = model.translate(line, target_lang = 'ja')
+
 			jplines += line + '\n'
 
 		print(jplines)
@@ -58,6 +62,7 @@ def main(args):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description = 'PDFファイルを英語から日本語に変換')
 	parser.add_argument('--fileurl', default = 'https://arxiv.org/pdf/2006.11693v2.pdf', help = 'PDFファイルURL')
+	parser.add_argument('--gpu', action='store_false', help='CPU or GPU')
 	args = parser.parse_args()
 
 	try:
